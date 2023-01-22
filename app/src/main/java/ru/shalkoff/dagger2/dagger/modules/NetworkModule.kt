@@ -3,6 +3,7 @@ package ru.shalkoff.dagger2.dagger.modules
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import ru.shalkoff.dagger2.simple2.GithubServiceModule
 
 @Module(
@@ -20,6 +21,7 @@ class NetworkModule {
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 }
