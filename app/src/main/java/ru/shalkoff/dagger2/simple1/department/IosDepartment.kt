@@ -1,6 +1,8 @@
 package ru.shalkoff.dagger2.simple1.department
 
-class IosDepartment: IDepartment {
+import javax.inject.Inject
+
+class IosDepartment @Inject constructor() : IDepartment {
 
     override fun getInfo(): String {
         return "Это айос отдел"

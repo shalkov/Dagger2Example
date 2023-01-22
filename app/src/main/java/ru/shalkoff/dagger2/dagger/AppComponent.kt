@@ -3,6 +3,7 @@ package ru.shalkoff.dagger2.dagger
 import dagger.Component
 import ru.shalkoff.dagger2.MainActivity
 import ru.shalkoff.dagger2.dagger.modules.DepartmentModule
+import ru.shalkoff.dagger2.dagger.modules.NetworkModule
 
 /**
  * Это основной компонент приложения (создание графа зависимостей)
@@ -10,7 +11,10 @@ import ru.shalkoff.dagger2.dagger.modules.DepartmentModule
  * Из компонента, можно получать зависимости
  */
 @Component(
-    modules = [DepartmentModule::class]
+    modules = [
+        NetworkModule::class,
+        DepartmentModule::class
+    ]
 )
 interface AppComponent {
 
