@@ -7,7 +7,7 @@ import ru.shalkoff.dagger2.simple2.GithubRepository
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
-    val githubRepository: GithubRepository
+    private val githubRepository: GithubRepository
 ): ViewModel() {
 
     fun loadRepos() {

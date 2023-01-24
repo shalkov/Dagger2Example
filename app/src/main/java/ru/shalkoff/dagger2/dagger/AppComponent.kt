@@ -2,6 +2,7 @@ package ru.shalkoff.dagger2.dagger
 
 import dagger.Component
 import ru.shalkoff.dagger2.MainActivity
+import ru.shalkoff.dagger2.dagger.modules.AppModule
 import ru.shalkoff.dagger2.dagger.modules.DepartmentModule
 import ru.shalkoff.dagger2.dagger.modules.NetworkModule
 import javax.inject.Singleton
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        AppModule::class,
         NetworkModule::class,
         DepartmentModule::class,
         ViewModelModule::class
