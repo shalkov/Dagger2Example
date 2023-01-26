@@ -13,12 +13,28 @@ import ru.shalkoff.dagger2.simple4.CompanyInfo
 import ru.shalkoff.dagger2.simple3.AnalyticsRepository
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Provider
 
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * обёртка dagger.Lazy, позволяет сделать отложенную инициализацию объекта
+     * Объект будет создан при вызове метода get(), а при последующих вызовах метода get() он будет переиспользоваться
+     *
+     * Обёртка иногда может помочь, но стоит понимать, что при каждом вызове get() вызывается DoubleCheck проверка.
+     * В этой статье говориться, что это может быть накладно: https://medium.com/@vimalp015/to-use-dagger-lazy-t-or-not-to-49768841495
+     * Поэтому рекоммендуется использовать Lazy только в тех случаях, когда объект тяжёлый и не факт, что будет проинициализирован при использовании приложения.
+     *
+     * ------------
+     * Еще есть обёртка Provider, делает так, что при каждом обращении к объекту он будет зановго проинициализирован.
+     * Сами авторы библиотеки даггер, рекоммендуют не часто использовать.
+     * ------------
+     * Если объекто который поставляется будет помечен аннотацией @Singlton - то он будет проинициализирова один раз
+     * Независимо что используется Lazy или Provider
+     */
     @Inject
     @Named("firebase")
-    lateinit var analyticsFirebaseRepository: AnalyticsRepository
+    lateinit var analyticsFirebaseRepository: dagger.Lazy<AnalyticsRepository>
 
     @Inject
     @Named("mindbox")
@@ -26,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     @Inject
     lateinit var companyInfoFactory: CompanyInfo.Factory
 
@@ -68,13 +85,13 @@ class MainActivity : AppCompatActivity() {
      * Зависимость поставлена в активити, через интерфейс посредством @Bind
      */
     private fun sendFirebaseAnalyticsEvent() {
-        Log.d("LOG", analyticsFirebaseRepository.showCartEvent())
+        Log.d("LOG", analyticsFirebaseRepository.get().showCartEvent())
     }
 
     /**
      * Зависимость поставлена в активити, через интерфейс посредством @Bind
      */
     private fun sendMindboxAnalyticsEvent() {
-        Log.d("LOG", analyticsFirebaseRepository.showCartEvent())
+        Log.d("LOG", analyticsMindboxRepository.showCartEvent())
     }
 }
