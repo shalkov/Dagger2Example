@@ -11,6 +11,7 @@ import ru.shalkoff.dagger2.dagger.app_injector.AppInjector
 import ru.shalkoff.dagger2.simple1.Company
 import ru.shalkoff.dagger2.simple4.CompanyInfo
 import ru.shalkoff.dagger2.simple3.AnalyticsRepository
+import ru.shalkoff.dagger2.simple5.ResourceManager
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
@@ -50,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         companyInfoFactory.create(name = "Surf")
     }
 
+    @Inject
+    lateinit var resourceManager: ResourceManager
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         sendMindboxAnalyticsEvent()
 
         val companyInfoTv = findViewById<TextView>(R.id.company_info_tv)
-        companyInfoTv.text = companyInfo.androidDepartment.getInfo()
+        companyInfoTv.text = resourceManager.getString()
 
         val viewModel = ViewModelProvider(this, viewModelFactory)[MainActivityViewModel::class.java]
         viewModel.loadRepos()
