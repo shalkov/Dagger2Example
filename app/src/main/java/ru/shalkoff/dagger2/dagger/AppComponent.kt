@@ -8,6 +8,8 @@ import ru.shalkoff.dagger2.dagger.modules.AppModule
 import ru.shalkoff.dagger2.dagger.modules.DepartmentModule
 import ru.shalkoff.dagger2.dagger.modules.NetworkModule
 import ru.shalkoff.dagger2.simple5.ResourceModule
+import ru.shalkoff.dagger2.simple6.AppDependency
+import ru.shalkoff.dagger2.simple6.PayModule
 import javax.inject.Singleton
 
 /**
@@ -22,7 +24,11 @@ import javax.inject.Singleton
         NetworkModule::class,
         DepartmentModule::class,
         ViewModelModule::class,
-        ResourceModule::class
+        ResourceModule::class,
+        PayModule::class
+    ],
+    dependencies = [
+        AppDependency::class
     ]
 )
 interface AppComponent {
@@ -30,7 +36,9 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun context(context: Context): Builder
+        fun bindContext(context: Context): Builder
+
+        fun appDependency(appDependency: AppDependency): Builder
 
         fun build(): AppComponent
     }
