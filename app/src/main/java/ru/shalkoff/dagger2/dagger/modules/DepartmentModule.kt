@@ -3,6 +3,7 @@ package ru.shalkoff.dagger2.dagger.modules
 import dagger.Module
 import dagger.Provides
 import ru.shalkoff.dagger2.simple1.department.AndroidJuniorGroup
+import javax.inject.Singleton
 
 /**
  * Нет необходимости провайдить какие-то классы, через модули, если есть возможность
@@ -18,6 +19,7 @@ import ru.shalkoff.dagger2.simple1.department.AndroidJuniorGroup
 @Module
 class DepartmentModule {
 
+    @Singleton
     @Provides
     fun provideAndroidJuniorGroup(): AndroidJuniorGroup {
         return AndroidJuniorGroup()

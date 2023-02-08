@@ -1,9 +1,8 @@
-package ru.shalkoff.dagger2.dagger.app_injector
+package ru.shalkoff.dagger2.dagger.injectors
 
 import android.content.Context
 import ru.shalkoff.dagger2.dagger.AppComponent
 import ru.shalkoff.dagger2.dagger.DaggerAppComponent
-import ru.shalkoff.dagger2.simple5.ResourceModule
 import ru.shalkoff.dagger2.simple6.AppDependency
 
 /**
@@ -22,9 +21,9 @@ object AppInjector {
         }
 
     fun initDaggerAppComponent(context: Context) {
-       _appComponent = DaggerAppComponent.builder()
-           .appDependency(AppDependency())
-           .bindContext(context)
-           .build()
+        _appComponent = DaggerAppComponent.builder()
+            .appDependency(AppDependency())
+            .bindContext(context)
+            .build()
     }
 }

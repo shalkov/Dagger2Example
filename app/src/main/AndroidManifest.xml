@@ -16,6 +16,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".simple7.RegStepOneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".simple7.RegStepTwoActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

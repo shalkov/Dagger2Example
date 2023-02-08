@@ -1,21 +1,23 @@
 package ru.shalkoff.dagger2
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import ru.shalkoff.dagger2.dagger.app_injector.AppInjector
+import ru.shalkoff.dagger2.dagger.injectors.AppInjector
 import ru.shalkoff.dagger2.simple1.Company
 import ru.shalkoff.dagger2.simple4.CompanyInfo
 import ru.shalkoff.dagger2.simple3.AnalyticsRepository
 import ru.shalkoff.dagger2.simple5.ResourceManager
 import ru.shalkoff.dagger2.simple6.PayProcess
+import ru.shalkoff.dagger2.simple7.RegStepOneActivity
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Provider
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,9 +71,15 @@ class MainActivity : AppCompatActivity() {
         val companyInfoTv = findViewById<TextView>(R.id.company_info_tv)
         companyInfoTv.text = payProcess.payManager.pay()
 
-        val viewModel = ViewModelProvider(this, viewModelFactory)[MainActivityViewModel::class.java]
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
         viewModel.loadRepos()
 
+
+        val openRegBtn = findViewById<Button>(R.id.open_reg_btn)
+        openRegBtn.setOnClickListener {
+            val regIntent = Intent(this, RegStepOneActivity::class.java)
+            startActivity(regIntent)
+        }
     }
 
     /**
