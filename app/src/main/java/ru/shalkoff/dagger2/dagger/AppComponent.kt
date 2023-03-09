@@ -11,6 +11,8 @@ import ru.shalkoff.dagger2.simple1.department.AndroidJuniorGroup
 import ru.shalkoff.dagger2.simple5.ResourceModule
 import ru.shalkoff.dagger2.simple6.AppDependency
 import ru.shalkoff.dagger2.simple6.PayModule
+import ru.shalkoff.dagger2.simple8.AnimalModule
+import ru.shalkoff.dagger2.simple9.RobotModule
 import javax.inject.Singleton
 
 /**
@@ -26,7 +28,9 @@ import javax.inject.Singleton
         DepartmentModule::class,
         ViewModelModule::class,
         ResourceModule::class,
-        PayModule::class
+        PayModule::class,
+        AnimalModule::class,
+        RobotModule::class
     ],
     dependencies = [
         AppDependency::class

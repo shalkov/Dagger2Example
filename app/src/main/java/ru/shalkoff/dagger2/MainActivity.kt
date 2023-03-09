@@ -16,8 +16,11 @@ import ru.shalkoff.dagger2.simple3.AnalyticsRepository
 import ru.shalkoff.dagger2.simple5.ResourceManager
 import ru.shalkoff.dagger2.simple6.PayProcess
 import ru.shalkoff.dagger2.simple7.RegStepOneActivity
+import ru.shalkoff.dagger2.simple8.Animal
+import ru.shalkoff.dagger2.simple9.Robot
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Provider
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,6 +63,18 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var payProcess: PayProcess
 
+    /**
+     * Получаем коллекцию запровайдженных объектов. См. AnimalModule.kt
+     */
+    @Inject
+    lateinit var animals: Set<@JvmSuppressWildcards Animal>
+
+    /**
+     * Получаем Map запровайдженных объектов. См. RobotModule.kt
+     */
+    @Inject
+    lateinit var robots: Map<Class<*>, @JvmSuppressWildcards Provider<Robot>>
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +94,13 @@ class MainActivity : AppCompatActivity() {
         openRegBtn.setOnClickListener {
             val regIntent = Intent(this, RegStepOneActivity::class.java)
             startActivity(regIntent)
+        }
+        animals.forEach {
+            println(it.name())
+        }
+
+        robots.forEach { (key, value) ->
+            println(key.name + " " + value.get().name())
         }
     }
 
